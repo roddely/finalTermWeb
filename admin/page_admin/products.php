@@ -1,121 +1,169 @@
+<!-- filepath: c:\xampp\htdocs\web-project-php\admin\page_admin\products.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Products</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .product-img { width: 60px; height: 60px; object-fit: cover; }
+    </style>
+</head>
+<body>
 <div class="d-flex">
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Header -->
+    <div class="main-content flex-grow-1">
         <header class="bg-white border-bottom p-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="search-bar">
-                    <div class="input-group">
-                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-search"></i></span>
-                        <input type="text" class="form-control bg-light border-start-0" placeholder="Search products...">
-                    </div>
+                    <form method="GET" action="../index.php">
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-search"></i></span>
+                            <input type="text" name="search" class="form-control bg-light border-start-0" placeholder="Search products..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+                            <input type="hidden" name="page" value="products">
+                            <input type="hidden" name="p" value="<?= htmlspecialchars($currentPage, ENT_QUOTES, 'UTF-8') ?>">
+                        </div>
+                    </form>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                    <button class="btn btn-light position-relative">
+                    <button class="btn btn-light position-relative" title="Notifications">
                         <i class="bi bi-bell"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
                     </button>
                     <div class="dropdown">
-                        <button class="btn d-flex align-items-center gap-2" data-bs-toggle="dropdown">
+                        <button class="btn d-flex align-items-center gap-2" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" class="avatar" alt="Admin">
                             <div class="d-none d-md-block text-start">
                                 <div class="fw-bold">Alex Johnson</div>
                                 <div class="small text-muted">Admin</div>
                             </div>
                         </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- Products Content -->
+        <div id="alertContainer"></div>
+
         <div class="p-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="mb-0">Products</h2>
-                <button class="btn btn-primary">
+                <a href="add_product.php" class="btn btn-primary">
                     <i class="bi bi-plus-lg me-2"></i>Add New Product
-                </button>
+                </a>
             </div>
 
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="productsTable">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Product</th>
-                                    <th>Category</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
                                     <th>Price</th>
                                     <th>Stock</th>
-                                    <th>Status</th>
+                                    <th>Image</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg" alt="Headphones" class="product-img me-3">
-                                            <div>
-                                                <h6 class="mb-0">Premium Wireless Headphones</h6>
-                                                <small class="text-muted">#PRD001</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Electronics</td>
-                                    <td>$249.99</td>
-                                    <td>156</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-light me-2"><i class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-light"><i class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg" alt="Smart Watch" class="product-img me-3">
-                                            <div>
-                                                <h6 class="mb-0">Smart Watch Series 5</h6>
-                                                <small class="text-muted">#PRD002</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Electronics</td>
-                                    <td>$299.99</td>
-                                    <td>89</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-light me-2"><i class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-light"><i class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="https://images.pexels.com/photos/6976094/pexels-photo-6976094.jpeg" alt="TV" class="product-img me-3">
-                                            <div>
-                                                <h6 class="mb-0">Ultra HD 4K TV 55"</h6>
-                                                <small class="text-muted">#PRD003</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Electronics</td>
-                                    <td>$699.99</td>
-                                    <td>42</td>
-                                    <td><span class="badge bg-warning">Low Stock</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-light me-2"><i class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-light"><i class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
+                                <?php if (isset($products) && !empty($products)): ?>
+                                    <?php foreach ($products as $product): ?>
+                                        <tr>
+                                            <td><?= htmlspecialchars($product->productID, ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars($product->productName, ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars($product->title, ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars($product->description, ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td>$<?= number_format(htmlspecialchars($product->price, ENT_QUOTES, 'UTF-8'), 2) ?></td>
+                                            <td><?= htmlspecialchars($product->stockQuantity, ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td>
+                                                <?php if (!empty($product->image)): ?>
+                                                    <img src="<?= htmlspecialchars($product->image, ENT_QUOTES, 'UTF-8') ?>" alt="Product Image" class="product-img">
+                                                <?php else: ?>
+                                                    <span>No image</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <a href="edit_product.php?id=<?= htmlspecialchars($product->productID, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-sm btn-light me-2" title="Edit"><i class="bi bi-pencil"></i></a>
+                                                <button class="btn btn-sm btn-light delete-product" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-product-id="<?= htmlspecialchars($product->productID, ENT_QUOTES, 'UTF-8') ?>"><i class="bi bi-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="8" class="text-center">No products found.</td>
+                                    </tr>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-end">
+                            <?php
+                            $totalPages = ceil($totalProducts / $perPage);
+                            $prevClass = $currentPage <= 1 ? 'disabled' : '';
+                            echo '<li class="page-item ' . $prevClass . '">';
+                            echo '<a class="page-link" href="../index.php?page=products&p=' . ($currentPage - 1) . '">Previous</a>';
+                            echo '</li>';
+
+                            for ($i = 1; $i <= $totalPages; $i++) {
+                                $activeClass = $i == $currentPage ? 'active' : '';
+                                echo '<li class="page-item ' . $activeClass . '">';
+                                echo '<a class="page-link" href="../index.php?page=products&p=' . $i . '">' . $i . '</a>';
+                                echo '</li>';
+                            }
+
+                            $nextClass = $currentPage >= $totalPages ? 'disabled' : '';
+                            echo '<li class="page-item ' . $nextClass . '">';
+                            echo '<a class="page-link" href="../index.php?page=products&p=' . ($currentPage + 1) . '">Next</a>';
+                            echo '</li>';
+                            ?>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa sản phẩm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa sản phẩm này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Có</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../admin/assets_admin/js_admin/products.js"></script>
+<script>
+    // Truyền biến từ PHP sang JavaScript
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentPage = <?= json_encode(htmlspecialchars($currentPage, ENT_QUOTES, 'UTF-8')) ?>;
+        var search = <?= json_encode(isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '') ?>;
+        initializeProducts(currentPage, search);
+    });
+</script>
+</body>
+</html>
