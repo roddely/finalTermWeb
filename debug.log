@@ -1,0 +1,16 @@
+Controller: adminProduct, Action: add
+POST Data: Array
+(
+    [productName] => adad
+    [title] => adad
+    [description] => adad
+    [price] => 12
+    [stockQuantity] => 32
+    [brandID] => 1
+    [categoryID] => 1
+    [ageFrom] => 1
+    [ageTo] => 12
+    [image] => adddada
+)
+
+Controller: adminProduct, Action: add

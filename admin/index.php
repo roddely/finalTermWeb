@@ -1,12 +1,16 @@
 <?php
-//router
+// index.php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once __DIR__ . '/../config/Database.php';
+
+// Nếu không phải yêu cầu API, tiếp tục xử lý trang HTML
 $pageParam = $_GET['page'] ?? 'home';
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +22,6 @@ $pageParam = $_GET['page'] ?? 'home';
     <script src="https://kit.fontawesome.com/8a0a2d882c.js" crossorigin="anonymous"></script>
     <link href="../admin/assets_admin/css_admin/home_css.css" rel="stylesheet">
 </head>
-
 <body>
     <?php
     include '../admin/layout/sidebar.php';
@@ -27,9 +30,6 @@ $pageParam = $_GET['page'] ?? 'home';
         <?php
         switch ($pageParam) {
             case '':
-                include '../admin/page_admin/home.php';
-                echo '<script src="../assets_admin/js_admin/home.js"></script>';
-                break;
             case 'home':
                 include '../admin/page_admin/home.php';
                 echo '<script src="../assets_admin/js_admin/home.js"></script>';
@@ -56,28 +56,25 @@ $pageParam = $_GET['page'] ?? 'home';
 
                 // Lấy dữ liệu sản phẩm và thông tin phân trang
                 $data = $productController->showAllProducts($page);
+                if (!$data || !isset($data['products'])) {
+                    throw new Exception('Failed to load products');
+                }
                 $products = $data['products'];
                 $totalProducts = $data['totalProducts'];
                 $perPage = $data['perPage'];
                 $currentPage = $data['currentPage'];
 
-                include  __DIR__ . '/../admin/page_admin/products.php';
-
-                // - `$page`: Lấy số trang từ `$_GET['p']`, kiểm tra là số dương, mặc định là 1.
-                // - `$data`: Nhận mảng từ `showAllProducts()` chứa `products`, `totalProducts`, `perPage`, và `currentPage`.
-                // - Gán các giá trị vào biến để sử dụng trong `products.php`.
+                include __DIR__ . '/../admin/page_admin/products.php';
                 break;
             case 'orders':
                 include '../admin/page_admin/orders.php';
                 break;
             default:
-                # code...
+                include '../admin/page_admin/home.php';
+                echo '<script src="../assets_admin/js_admin/home.js"></script>';
                 break;
         }
         ?>
-        <!-- Back to Top Button -->
-        <!-- <a href="#" class="back-to-top" id="backToTop">
-            <i class="fa fa-arrow-up"></i>
-        </a> -->
     </div>
 </body>
+</html>

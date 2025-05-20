@@ -1,0 +1,14 @@
+Adding product: Array
+(
+    [productName] => add
+    [title] => dâdad
+    [description] => daadad
+    [price] => 12
+    [stockQuantity] => 32
+    [brandID] => 1
+    [categoryID] => 1
+    [ageFrom] => 1
+    [ageTo] => 12
+    [image] => adadaff
+)
+

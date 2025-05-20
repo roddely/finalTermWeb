@@ -1,0 +1,42 @@
+Array
+(
+    [productName] => adaad
+    [title] => adadad
+    [description] => adadad
+    [price] => 12
+    [stockQuantity] => 32
+    [brandID] => 1
+    [categoryID] => 1
+    [ageFrom] => 1
+    [ageTo] => 13
+    [image] => adadad
+)
+
+Array
+(
+    [productName] => adaad
+    [title] => adadad
+    [description] => adadad
+    [price] => 12
+    [stockQuantity] => 32
+    [brandID] => 1
+    [categoryID] => 1
+    [ageFrom] => 1
+    [ageTo] => 13
+    [image] => adadad
+)
+
+Array
+(
+    [productName] => adadad
+    [title] => adad
+    [description] => adadad
+    [price] => 12
+    [stockQuantity] => 42
+    [brandID] => 1
+    [categoryID] => 1
+    [ageFrom] => 1
+    [ageTo] => 13
+    [image] => dâdadd
+)
+

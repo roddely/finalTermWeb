@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../repository/AdminProductRepository.php';
+require_once __DIR__ . '/../config/Database.php';
 
 class AdminProductService
 {
@@ -24,7 +25,10 @@ class AdminProductService
     {
         return $this->productRepository->deactivateProduct($productId);
     }
-}
 
-// - Thêm phương thức `getAllProducts($page, $perPage)` để truyền tham số phân trang đến repository.
-// - Thêm phương thức `getTotalProducts()` để lấy tổng số sản phẩm.
+    public function addProduct($data)
+    {
+        file_put_contents(__DIR__ . '/debug.log', "Adding product: " . print_r($data, true) . "\n", FILE_APPEND);
+        return $this->productRepository->insertProduct($data);
+    }
+}
